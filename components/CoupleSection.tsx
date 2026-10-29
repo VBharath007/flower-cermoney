@@ -110,13 +110,16 @@ export default function CoupleSection({ active }: CoupleSectionProps) {
           Your browser does not support video playback.
         </video>
 
-        {/* Seamless top mask overlay to remove the line above "A beautiful beginning" */}
+        {/* Precision mask to remove only the thin line above "A beautiful beginning" without covering side flowers or letters */}
         <div
-          className="absolute top-0 inset-x-0 h-[8.5%] sm:h-[9.2%] z-10 pointer-events-none select-none"
+          className="absolute z-10 pointer-events-none select-none"
           style={{
-            background: 'radial-gradient(ellipse 70% 120% at 50% 0%, #0a3d44 0%, #03252c 60%, #011b20 100%)',
-            maskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)',
+            top: '2.8%',
+            height: '2.8%',
+            left: '17.5%',
+            right: '17.5%',
+            background: 'radial-gradient(ellipse at 50% 50%, #094047 0%, #03272e 60%, #011d22 100%)',
+            filter: 'blur(1.5px)',
           }}
           aria-hidden="true"
         />
