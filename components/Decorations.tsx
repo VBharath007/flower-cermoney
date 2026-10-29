@@ -2,9 +2,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
-export function Flourish() {
+export function Flourish({ className = '' }: { className?: string }) {
   return (
-    <div aria-hidden="true" className="flourish">
+    <div aria-hidden="true" className={`flourish ${className}`}>
       <span />✦ ❀ ✦<span />
     </div>
   );

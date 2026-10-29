@@ -84,7 +84,7 @@ export default function CoupleSection({ active }: CoupleSectionProps) {
         Blends seamlessly into the dark peacock teal background 
       */}
       <div
-        className="relative w-full max-w-[1040px] max-h-[72vh] aspect-[16/9] mx-auto rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_16px_40px_rgba(0,10,14,0.75)] border border-[#d5b56d44] group cursor-pointer bg-[#022026]"
+        className="relative w-full max-w-[1100px] aspect-[16/9] mx-auto rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_16px_40px_rgba(0,10,14,0.75)] border border-[#d5b56d44] group cursor-pointer bg-[#022026]"
         onClick={handleVideoClick}
         title="Tap to replay bride & groom walking entrance"
       >
@@ -109,15 +109,6 @@ export default function CoupleSection({ active }: CoupleSectionProps) {
           <source src="/images/bride%20groom%20walk.mp4" type="video/mp4" />
           Your browser does not support video playback.
         </video>
-
-        {/* 
-          Conceal the AI-generated cut-off text artifact at the bottom of the video,
-          while preserving the couple's feet and bottom floral border completely intact.
-        */}
-        <div
-          className="absolute bottom-0 inset-x-0 h-[10.5%] pointer-events-none bg-gradient-to-t from-[#022026] via-[#022026] to-transparent z-15"
-          aria-hidden="true"
-        />
 
         {/* =========================================================
             LEFT NAME: Directly & perfectly centered below "Bride"
@@ -203,35 +194,31 @@ export default function CoupleSection({ active }: CoupleSectionProps) {
           />
         </motion.div>
 
-        {/* =========================================================
-            CENTER SUBTITLE: "Together, with love & blessings"
-            Appears promptly when couple stands in the center.
-            Cleanly placed inside the card without any border collision.
-            ========================================================= */}
-        <motion.div
-          className="absolute bottom-2 sm:bottom-3 md:bottom-3.5 inset-x-0 flex justify-center items-center pointer-events-none select-none z-20"
-          initial={false}
-          animate={{
-            opacity: joined ? 1 : 0,
-            y: joined ? 0 : 6,
-          }}
-          transition={{
-            duration: 0.35,
-            delay: 0.1,
-            ease: 'easeOut',
-          }}
-        >
-          <p className="font-['Great_Vibes',cursive] !text-[clamp(15px,2.1vw,30px)] !text-[#f7d688] m-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] tracking-wide">
-            Together, with love & blessings
-          </p>
-        </motion.div>
-
         {/* Replay indicator on hover */}
-        <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 px-2 sm:px-2.5 py-1 rounded-full bg-[#001f25b3] border border-[#d5b56d55] text-[#ffd77a] text-[9px] sm:text-[10px] font-cinzel tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 shadow-md pointer-events-none z-30">
+        <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 px-2 sm:px-2.5 py-1 rounded-full bg-[#001f25b3] border border-[#d5b56d55] text-[#ffd77a] text-[9px] sm:text-[10px] font-cinzel tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 shadow-md pointer-events-none z-30">
           <RotateCcw size={10} />
           <span>Replay</span>
         </div>
       </div>
+
+      {/* Subtitle below: Together, with love & blessings */}
+      <motion.div
+        initial={false}
+        animate={{
+          opacity: joined ? 1 : 0,
+          y: joined ? 0 : 6,
+        }}
+        transition={{
+          duration: 0.35,
+          delay: 0.1,
+          ease: 'easeOut',
+        }}
+        className="mt-2 sm:mt-3 text-center"
+      >
+        <p className="script together !text-[clamp(20px,2.8vw,34px)] !text-[#f7d688] m-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+          Together, with love & blessings
+        </p>
+      </motion.div>
     </div>
   );
 }

@@ -73,7 +73,7 @@ export default function Countdown({ active = true }: CountdownProps) {
 
   return (
     <>
-      <div className="countdown grid grid-cols-4 gap-1.5 sm:gap-3 md:gap-4 max-w-[660px] mx-auto my-3 sm:my-5 md:my-7">
+      <div className="countdown grid grid-cols-4 gap-1.5 sm:gap-3 md:gap-4 max-w-[660px] mx-auto !my-2 sm:!my-3 md:!my-4">
         {values.map((v, i) => {
           // Sequential stagger for royal door opening
           const delay = i * 0.35;
@@ -260,7 +260,7 @@ export default function Countdown({ active = true }: CountdownProps) {
         })}
       </div>
 
-      <p className="countdown-note">
+      <p className="countdown-note !mt-1.5 sm:!mt-2 !mb-1 text-[clamp(12px,1.4vw,16px)]">
         {now !== null && seconds === 0
           ? 'The special day has arrived. Thank you for your blessings.'
           : 'Every moment brings us closer to a beautiful beginning.'}

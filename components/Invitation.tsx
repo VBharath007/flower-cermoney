@@ -21,7 +21,7 @@ const sections = [
 function Reveal({ children, className = '', side = 0 }: { children: React.ReactNode; className?: string; side?: number }) {
   return <div className={className}>{children}</div>;
 }
-function Details() { return <div className="details grid grid-cols-3"><div><CalendarDays /><p className="detail-label">Date</p><p>{data.dateLabel}<small>{data.dayLabel}</small></p></div><div><Clock3 /><p className="detail-label">Time</p><p>{data.timeLabel}<small>With your blessings</small></p></div><div><MapPin /><p className="detail-label">Venue</p><p>{data.venue}<small>{data.city}</small></p></div></div> }
+function Details() { return <div className="details grid grid-cols-3 !my-2 sm:!my-3 !py-2 sm:!py-3"><div><CalendarDays /><p className="detail-label">Date</p><p>{data.dateLabel}<small>{data.dayLabel}</small></p></div><div><Clock3 /><p className="detail-label">Time</p><p>{data.timeLabel}<small>With your blessings</small></p></div><div><MapPin /><p className="detail-label">Venue</p><p>{data.venue}<small>{data.city}</small></p></div></div> }
 export default function Invitation() {
   const [opened, setOpened] = useState(false); const [active, setActive] = useState(0); const mainRef = useRef<HTMLElement>(null); const welcomeRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -109,7 +109,7 @@ export default function Invitation() {
       <Flowers className="bottom-right" />
       <div className="scene-content !py-2 sm:!py-5 max-w-[960px] mx-auto w-full">
         <Reveal>
-          <p className="script">You&apos;re cordially invited</p>
+        
           <h2 className="ceremony-title">Flower Ceremony</h2>
           <Flourish />
           <div className="relative mx-auto mt-2 sm:mt-4 max-w-[620px] w-full rounded-2xl p-[3px] sm:p-1 bg-gradient-to-b from-[#f7d988] via-[#d5a643] to-[#966d1e] shadow-[0_20px_50px_rgba(0,10,14,0.9),0_0_35px_rgba(213,181,109,0.25)]">
@@ -137,7 +137,27 @@ export default function Invitation() {
       <Lamp className="scene-lamp left" />
       <Lamp className="scene-lamp right" />
     </section>
-    <section id="section-3" data-index="3" className="scene"><Frame active={active === 3} /><div className="scene-content"><Reveal><p className="script">The auspicious day is near</p><h2>Counting down to the celebration</h2><Flourish /><Countdown active={active === 3} /><Details /><a className="gold-button inline-flex mt-3 sm:mt-5 md:mt-7" href={data.mapUrl} target="_blank" rel="noopener noreferrer">View location <ArrowRight size={16} /></a></Reveal></div></section>
+    <section id="section-3" data-index="3" className="scene">
+      <Frame active={active === 3} />
+      <div className="scene-content !py-2 sm:!py-4 md:!py-6 !px-3 sm:!px-6 max-w-[960px] mx-auto w-full">
+        <Reveal>
+          <h2 className="mt-5 sm:mt-7 md:mt-9 !text-[clamp(19px,2.5vw,34px)] leading-tight text-[#f7d688]">
+            Counting down to the celebration
+          </h2>
+          <Flourish className="!my-2 sm:!my-2.5" />
+          <Countdown active={active === 3} />
+          <Details />
+          <a
+            className="gold-button inline-flex !mt-2 sm:!mt-3 md:!mt-4"
+            href={data.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View location <ArrowRight size={16} />
+          </a>
+        </Reveal>
+      </div>
+    </section>
     <section id="section-4" data-index="4" className="scene"><Frame active={active === 4} /><CeremonyStagePicture active={active === 4} /></section>
     <section id="section-5" data-index="5" className="scene gratitude-scene"><Frame active={active === 5} /><GratitudeScroll active={active === 5} onReplay={() => { go(0); setOpened(false); }} /></section>
   </main>
