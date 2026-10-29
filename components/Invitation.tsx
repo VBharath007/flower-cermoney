@@ -137,7 +137,26 @@ export default function Invitation() {
       <Lamp className="scene-lamp left" />
       <Lamp className="scene-lamp right" />
     </section>
-    <section id="section-3" data-index="3" className="scene"><Frame active={active === 3} /><div className="scene-content"><Reveal><p className="script">The auspicious day is near</p><h2>Counting down to the celebration</h2><Flourish /><Countdown active={active === 3} /><Details /><a className="gold-button inline-flex mt-3 sm:mt-5 md:mt-7" href={data.mapUrl} target="_blank" rel="noopener noreferrer">View location <ArrowRight size={16} /></a></Reveal></div></section>
+    <section id="section-3" data-index="3" className="scene">
+      <Frame active={active === 3} />
+      <div className="scene-content !pt-14 sm:!pt-18 md:!pt-24 !pb-4 sm:!pb-6 max-w-[1040px] mx-auto">
+        <Reveal>
+          <p className="script !mt-6 sm:!mt-8 md:!mt-10 !mb-1 text-[#f7d688]">The auspicious day is near</p>
+          <h2 className="!mt-1 !mb-2 sm:!mb-3">Counting down to the celebration</h2>
+          <Flourish />
+          <Countdown active={active === 3} />
+          <Details />
+          <a
+            className="gold-button inline-flex mt-3 sm:mt-5 md:mt-6"
+            href={data.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View location <ArrowRight size={16} />
+          </a>
+        </Reveal>
+      </div>
+    </section>
     <section id="section-4" data-index="4" className="scene"><Frame active={active === 4} /><CeremonyStagePicture active={active === 4} /></section>
     <section id="section-5" data-index="5" className="scene gratitude-scene"><Frame active={active === 5} /><GratitudeScroll active={active === 5} onReplay={() => { go(0); setOpened(false); }} /></section>
   </main>
