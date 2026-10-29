@@ -78,13 +78,13 @@ function WordFadeText({
 
 export default function CeremonyStagePicture({ active }: CeremonyStagePictureProps) {
   return (
-    <div className="scene-content !py-2 !px-3 sm:!px-6 md:!px-8 max-w-[1240px] mx-auto w-full">
+    <div className="scene-content !pt-7 sm:!pt-9 md:!pt-12 !pb-3 !px-3 sm:!px-6 md:!px-8 max-w-[1240px] mx-auto w-full">
       {/* Top Header */}
-      <div className="mb-2 sm:mb-3 md:mb-5 text-center">
+      <div className="mt-2 sm:mt-3 md:mt-4 mb-2 sm:mb-3 md:mb-5 text-center">
         <h2 className="!text-[clamp(20px,3.2vw,38px)] !text-[#fff8e4] tracking-[0.06em] font-medium uppercase drop-shadow-[0_2px_10px_rgba(213,181,109,0.4)]">
           The Flower Ceremony
         </h2>
-        <Flourish />
+        <Flourish className="!my-1.5 sm:!my-2.5" />
       </div>
 
       {/* Main Split Layout: Left Side 4 Quotes + Right Side Family Cutout Artwork */}

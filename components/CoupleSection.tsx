@@ -202,23 +202,7 @@ export default function CoupleSection({ active }: CoupleSectionProps) {
       </div>
 
       {/* Subtitle below: Together, with love & blessings */}
-      <motion.div
-        initial={false}
-        animate={{
-          opacity: joined ? 1 : 0,
-          y: joined ? 0 : 6,
-        }}
-        transition={{
-          duration: 0.35,
-          delay: 0.1,
-          ease: 'easeOut',
-        }}
-        className="mt-2 sm:mt-3 text-center"
-      >
-        <p className="script together !text-[clamp(20px,2.8vw,34px)] !text-[#f7d688] m-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-          Together, with love & blessings
-        </p>
-      </motion.div>
+   
     </div>
   );
 }

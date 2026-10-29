@@ -107,12 +107,13 @@ export default function Invitation() {
       <Flowers className="top-right" />
       <Flowers className="bottom-left" />
       <Flowers className="bottom-right" />
-      <div className="scene-content !py-2 sm:!py-5 max-w-[960px] mx-auto w-full">
+      <div className="scene-content !pt-7 sm:!pt-9 md:!pt-12 !pb-3 !px-4 max-w-[960px] mx-auto w-full">
         <Reveal>
-        
-          <h2 className="ceremony-title">Flower Ceremony</h2>
-          <Flourish />
-          <div className="relative mx-auto mt-2 sm:mt-4 max-w-[620px] w-full rounded-2xl p-[3px] sm:p-1 bg-gradient-to-b from-[#f7d988] via-[#d5a643] to-[#966d1e] shadow-[0_20px_50px_rgba(0,10,14,0.9),0_0_35px_rgba(213,181,109,0.25)]">
+          <h2 className="ceremony-title mt-2 sm:mt-3 md:mt-4 !text-[clamp(24px,3.4vw,46px)] leading-tight tracking-[0.06em] text-[#f7d688]">
+            Flower Ceremony
+          </h2>
+          <Flourish className="!my-1.5 sm:!my-2.5" />
+          <div className="relative mx-auto mt-2 sm:mt-3 max-w-[520px] md:max-w-[560px] w-full rounded-2xl p-[3px] sm:p-1 bg-gradient-to-b from-[#f7d988] via-[#d5a643] to-[#966d1e] shadow-[0_20px_50px_rgba(0,10,14,0.9),0_0_35px_rgba(213,181,109,0.25)]">
             <div className="relative w-full aspect-[440/318] rounded-[13px] overflow-hidden bg-black border border-[#ffd77a55]">
               <video
                 ref={videoRef}
@@ -129,9 +130,6 @@ export default function Invitation() {
               </video>
             </div>
           </div>
-          <p className="message mt-3 sm:mt-4 text-center text-[clamp(14px,1.5vw,18px)]">
-            Your presence will make our celebration even more special.
-          </p>
         </Reveal>
       </div>
       <Lamp className="scene-lamp left" />
