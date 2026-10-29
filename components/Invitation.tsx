@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowLeft, ArrowRight, CalendarDays, Clock3, MapPin, Play, RotateCcw } from 'lucide-react';
+import { ArrowRight, CalendarDays, Clock3, MapPin, Play, RotateCcw } from 'lucide-react';
 import { invitation as data } from '@/lib/invitation';
 import Opening from './Opening';
 import CoupleSection from './CoupleSection';
@@ -150,18 +150,5 @@ export default function Invitation() {
     <section id="section-4" data-index="4" className="scene"><Frame active={active === 4} /><CeremonyStagePicture active={active === 4} /></section>
     <section id="section-5" data-index="5" className="scene gratitude-scene"><Frame active={active === 5} /><GratitudeScroll active={active === 5} onReplay={() => { go(0); setOpened(false); }} /></section>
   </main>
-  {opened && (
-    <>
-      <RightProgressNav active={active} onSelect={go} />
-      <nav className="section-nav" aria-label="Invitation sections">
-        <button onClick={() => go(active - 1)} disabled={active === 0} aria-label="Previous section"><ArrowLeft size={17} /></button>
-        <div className="nav-dots">
-          {sections.map((name, i) => (
-            <button key={name} onClick={() => go(i)} className={active === i ? 'active' : ''} aria-label={`${i + 1}. ${name}`} aria-current={active === i ? 'step' : undefined} />
-          ))}
-        </div>
-        <button onClick={() => go(active + 1)} disabled={active === 5} aria-label="Next section"><ArrowRight size={17} /></button>
-      </nav>
-    </>
-  )}</>;
+  {opened && <RightProgressNav active={active} onSelect={go} />}</>;
 }

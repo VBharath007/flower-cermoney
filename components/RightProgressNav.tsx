@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 export interface SectionItem {
   id: string;
@@ -24,6 +25,10 @@ interface RightProgressNavProps {
 
 export default function RightProgressNav({ active, onSelect }: RightProgressNavProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [hoveredArrow, setHoveredArrow] = useState<'top' | 'bottom' | null>(null);
+
+  const canGoDown = active < SECTIONS.length - 1;
+  const canGoUp = active > 0;
 
   return (
     <nav
@@ -32,11 +37,52 @@ export default function RightProgressNav({ active, onSelect }: RightProgressNavP
     >
       {/* Decorative vertical golden guide line */}
       <div
-        className="absolute top-2 bottom-2 left-1/2 -translate-x-1/2 w-[1px] bg-gradient-to-b from-transparent via-[#d5b56d40] to-transparent pointer-events-none"
+        className="absolute top-8 bottom-8 left-1/2 -translate-x-1/2 w-[1px] bg-gradient-to-b from-transparent via-[#d5b56d35] to-transparent pointer-events-none"
         aria-hidden="true"
       />
 
-      <div className="relative flex flex-col items-center gap-3.5 sm:gap-4 md:gap-4.5">
+      {/* TOP ARROW: Points down (↓) to descend to next section */}
+      <div
+        className="relative flex items-center justify-center mb-3 sm:mb-3.5 group"
+        onMouseEnter={() => setHoveredArrow('top')}
+        onMouseLeave={() => setHoveredArrow(null)}
+      >
+        <AnimatePresence>
+          {hoveredArrow === 'top' && canGoDown && (
+            <motion.div
+              role="tooltip"
+              initial={{ opacity: 0, x: 8, scale: 0.96 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 6, scale: 0.96 }}
+              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="hidden md:flex absolute right-full mr-3.5 top-1/2 -translate-y-1/2 pointer-events-none items-center z-50"
+            >
+              <div className="relative px-3 py-1.5 rounded-md bg-[#002228f0] border border-[#d5b56d88] shadow-[0_4px_20px_rgba(0,0,0,0.65),0_0_12px_rgba(213,181,109,0.2)] backdrop-blur-md whitespace-nowrap">
+                <span className="font-['Cinzel',serif] text-[11px] font-medium tracking-[0.08em] text-[#fff2c8] drop-shadow-xs">
+                  Next Section ↓
+                </span>
+                <div
+                  className="absolute top-1/2 -right-[5px] -translate-y-1/2 w-2 h-2 rotate-45 bg-[#002228f0] border-t border-r border-[#d5b56d88]"
+                  aria-hidden="true"
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <button
+          type="button"
+          onClick={() => canGoDown && onSelect(active + 1)}
+          disabled={!canGoDown}
+          aria-label="Next section (scroll down)"
+          className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[#d5b56d88] bg-[#00282ee8] text-[#f7d688] flex items-center justify-center backdrop-blur-md transition-all duration-300 hover:border-[#ffd77a] hover:bg-[#06444d] hover:text-[#fff5db] hover:shadow-[0_0_12px_rgba(247,214,136,0.5)] active:scale-90 disabled:opacity-25 disabled:cursor-default disabled:hover:border-[#d5b56d88] disabled:hover:bg-[#00282ee8] disabled:hover:shadow-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ffd77a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#01272e]"
+        >
+          <ChevronDown size={17} strokeWidth={2.4} className="transition-transform group-hover:translate-y-0.5" />
+        </button>
+      </div>
+
+      {/* THE 6 PROGRESS DOTS */}
+      <div className="relative flex flex-col items-center gap-3 sm:gap-3.5 md:gap-4 my-0.5">
         {SECTIONS.map((section, index) => {
           const isActive = active === index;
           const isHovered = hoveredIndex === index;
@@ -106,6 +152,46 @@ export default function RightProgressNav({ active, onSelect }: RightProgressNavP
             </div>
           );
         })}
+      </div>
+
+      {/* BOTTOM ARROW: Points up (↑) to ascend to previous section */}
+      <div
+        className="relative flex items-center justify-center mt-3 sm:mt-3.5 group"
+        onMouseEnter={() => setHoveredArrow('bottom')}
+        onMouseLeave={() => setHoveredArrow(null)}
+      >
+        <AnimatePresence>
+          {hoveredArrow === 'bottom' && canGoUp && (
+            <motion.div
+              role="tooltip"
+              initial={{ opacity: 0, x: 8, scale: 0.96 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 6, scale: 0.96 }}
+              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="hidden md:flex absolute right-full mr-3.5 top-1/2 -translate-y-1/2 pointer-events-none items-center z-50"
+            >
+              <div className="relative px-3 py-1.5 rounded-md bg-[#002228f0] border border-[#d5b56d88] shadow-[0_4px_20px_rgba(0,0,0,0.65),0_0_12px_rgba(213,181,109,0.2)] backdrop-blur-md whitespace-nowrap">
+                <span className="font-['Cinzel',serif] text-[11px] font-medium tracking-[0.08em] text-[#fff2c8] drop-shadow-xs">
+                  Previous Section ↑
+                </span>
+                <div
+                  className="absolute top-1/2 -right-[5px] -translate-y-1/2 w-2 h-2 rotate-45 bg-[#002228f0] border-t border-r border-[#d5b56d88]"
+                  aria-hidden="true"
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <button
+          type="button"
+          onClick={() => canGoUp && onSelect(active - 1)}
+          disabled={!canGoUp}
+          aria-label="Previous section (scroll up)"
+          className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[#d5b56d88] bg-[#00282ee8] text-[#f7d688] flex items-center justify-center backdrop-blur-md transition-all duration-300 hover:border-[#ffd77a] hover:bg-[#06444d] hover:text-[#fff5db] hover:shadow-[0_0_12px_rgba(247,214,136,0.5)] active:scale-90 disabled:opacity-25 disabled:cursor-default disabled:hover:border-[#d5b56d88] disabled:hover:bg-[#00282ee8] disabled:hover:shadow-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ffd77a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#01272e]"
+        >
+          <ChevronUp size={17} strokeWidth={2.4} className="transition-transform group-hover:-translate-y-0.5" />
+        </button>
       </div>
     </nav>
   );
