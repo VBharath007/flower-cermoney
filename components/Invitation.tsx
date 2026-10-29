@@ -8,8 +8,16 @@ import CoupleSection from './CoupleSection';
 import Countdown from './Countdown';
 import CeremonyStagePicture from './CeremonyStagePicture';
 import GratitudeScroll from './GratitudeScroll';
+import RightProgressNav from './RightProgressNav';
 import { Flowers, Flourish, Frame, Lamp, Petals, TempleBackdrop, Sparkles } from './Decorations';
-const sections = ['Welcome', 'The couple', 'Invitation', 'Countdown', 'Ceremony film', 'With gratitude'];
+const sections = [
+  'Opening Invitation',
+  'Meet the Couple',
+  'The Flower Ceremony Invitation',
+  'Ceremony Details',
+  'Flower Ceremony Animation / Video',
+  'Family & Gratitude',
+];
 function Reveal({ children, className = '', side = 0 }: { children: React.ReactNode; className?: string; side?: number }) {
   return <div className={className}>{children}</div>;
 }
@@ -53,21 +61,33 @@ export default function Invitation() {
   }, [active]);
   useEffect(() => {
     let rafId: number | null = null;
+    const visibilityMap = new Map<number, number>();
+
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(e => {
-          if (e.isIntersecting) {
-            const idx = Number((e.target as HTMLElement).dataset.index);
-            if (!isNaN(idx)) {
-              if (rafId) cancelAnimationFrame(rafId);
-              rafId = requestAnimationFrame(() => {
-                setActive(prev => (prev !== idx ? idx : prev));
-              });
+          const idx = Number((e.target as HTMLElement).dataset.index);
+          if (!isNaN(idx)) {
+            visibilityMap.set(idx, e.isIntersecting ? e.intersectionRatio : 0);
+          }
+        });
+
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+          let maxRatio = 0;
+          let bestIdx = -1;
+          visibilityMap.forEach((ratio, idx) => {
+            if (ratio > maxRatio) {
+              maxRatio = ratio;
+              bestIdx = idx;
             }
+          });
+          if (bestIdx !== -1 && maxRatio > 0.25) {
+            setActive(prev => (prev !== bestIdx ? bestIdx : prev));
           }
         });
       },
-      { root: mainRef.current, threshold: 0.55 }
+      { root: mainRef.current, threshold: [0.15, 0.35, 0.55, 0.75, 0.95] }
     );
     mainRef.current?.querySelectorAll('section').forEach(s => observer.observe(s));
     return () => {
@@ -75,7 +95,11 @@ export default function Invitation() {
       observer.disconnect();
     };
   }, [opened]);
-  function go(index: number) { document.getElementById(`section-${Math.max(0, Math.min(5, index))}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }
+  function go(index: number) {
+    const target = Math.max(0, Math.min(5, index));
+    setActive(target);
+    document.getElementById(`section-${target}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
   function complete() { setOpened(true); }
   return <><AnimatePresence>{!opened && <Opening onComplete={complete} />}</AnimatePresence><main ref={mainRef} className={`invitation ${opened ? 'unlocked' : ''}`} inert={!opened} aria-label="Flower ceremony invitation">
     <section id="section-0" data-index="0" className="scene welcome"><Frame active={active === 0} /><Petals /><div className="welcome-mandala" aria-hidden="true" /><div className="scene-content !py-3 sm:!py-6 max-w-[960px] relative z-10"><Reveal>
@@ -125,5 +149,19 @@ export default function Invitation() {
     <section id="section-3" data-index="3" className="scene"><Frame active={active === 3} /><div className="scene-content"><Reveal><p className="script">The auspicious day is near</p><h2>Counting down to the celebration</h2><Flourish /><Countdown active={active === 3} /><Details /><a className="gold-button inline-flex mt-3 sm:mt-5 md:mt-7" href={data.mapUrl} target="_blank" rel="noopener noreferrer">View location <ArrowRight size={16} /></a></Reveal></div></section>
     <section id="section-4" data-index="4" className="scene"><Frame active={active === 4} /><CeremonyStagePicture active={active === 4} /></section>
     <section id="section-5" data-index="5" className="scene gratitude-scene"><Frame active={active === 5} /><GratitudeScroll active={active === 5} onReplay={() => { go(0); setOpened(false); }} /></section>
-  </main>{opened && <nav className="section-nav" aria-label="Invitation sections"><button onClick={() => go(active - 1)} disabled={active === 0} aria-label="Previous section"><ArrowLeft size={17} /></button><div className="nav-dots">{sections.map((name, i) => <button key={name} onClick={() => go(i)} className={active === i ? 'active' : ''} aria-label={`${i + 1}. ${name}`} aria-current={active === i ? 'step' : undefined} />)}</div><button onClick={() => go(active + 1)} disabled={active === 5} aria-label="Next section"><ArrowRight size={17} /></button></nav>}</>;
+  </main>
+  {opened && (
+    <>
+      <RightProgressNav active={active} onSelect={go} />
+      <nav className="section-nav" aria-label="Invitation sections">
+        <button onClick={() => go(active - 1)} disabled={active === 0} aria-label="Previous section"><ArrowLeft size={17} /></button>
+        <div className="nav-dots">
+          {sections.map((name, i) => (
+            <button key={name} onClick={() => go(i)} className={active === i ? 'active' : ''} aria-label={`${i + 1}. ${name}`} aria-current={active === i ? 'step' : undefined} />
+          ))}
+        </div>
+        <button onClick={() => go(active + 1)} disabled={active === 5} aria-label="Next section"><ArrowRight size={17} /></button>
+      </nav>
+    </>
+  )}</>;
 }
