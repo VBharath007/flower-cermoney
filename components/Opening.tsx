@@ -16,37 +16,19 @@ export default function Opening({ onComplete }: { onComplete: () => void }) {
   function open() {
     if (opening) return;
     setOpening(true);
-    // 0.4s subtle shake first -> gates open -> shows message for 2 seconds -> transitions smoothly
-    timer.current = setTimeout(onComplete, 2400);
+    // Gates split & open smoothly -> directly reveal the main invitation
+    timer.current = setTimeout(onComplete, 1150);
   }
 
   return (
     <motion.div
       className="opening"
-      exit={{ opacity: 0, scale: 1.04 }}
-      transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.45, ease: [0.25, 1, 0.5, 1] }}
       role="dialog"
       aria-modal="true"
       aria-label="Open your flower ceremony invitation"
     >
-      {/* 
-        Continuous cinematic glide for the message:
-        Floats gently and smoothly scales so it never feels static or stuck 
-      */}
-      <motion.div
-        className="opening-message"
-        initial={{ opacity: 0, scale: 0.94, y: 10 }}
-        animate={
-          opening
-            ? { opacity: 1, scale: 1.03, y: -4 }
-            : { opacity: 0.85, scale: 1, y: 0 }
-        }
-        transition={{ duration: 2.2, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
-      >
-        <p className="script">You are cordially invited</p>
-        <h1>{data.groom.name} & {data.bride.name}</h1>
-        <p>{data.title}</p>
-      </motion.div>
       <Petals />
 
       {/* Royal 3D Gates swinging open AFTER the gentle shake */}
