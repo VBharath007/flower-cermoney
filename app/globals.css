@@ -116,15 +116,18 @@ h3 {
 }
 
 .invitation.unlocked {
+    height: 100svh;
     overflow-y: auto;
     overflow-x: hidden;
-    overscroll-behavior-y: none;
+    scroll-behavior: smooth;
+    overscroll-behavior-y: contain;
     scrollbar-width: thin;
     scrollbar-color: var(--gold) var(--deep);
     -webkit-overflow-scrolling: touch;
 }
 
 .scene {
+    height: 100svh;
     min-height: 100svh;
     position: relative;
     display: flex;
@@ -134,8 +137,8 @@ h3 {
     background-color: #022026;
     background-image:
         radial-gradient(ellipse at 50% 36%, rgba(14, 84, 92, 0.68) 0%, rgba(3, 35, 41, 0.88) 60%, rgba(1, 23, 27, 0.98) 100%);
-    content-visibility: auto;
-    contain-intrinsic-size: 100svh;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .scene:after {

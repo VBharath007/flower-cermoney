@@ -60,34 +60,25 @@ export default function Invitation() {
     }
   }, [active]);
   useEffect(() => {
+    if (!opened) return;
     let rafId: number | null = null;
-    const visibilityMap = new Map<number, number>();
 
     const observer = new IntersectionObserver(
       entries => {
-        entries.forEach(e => {
-          const idx = Number((e.target as HTMLElement).dataset.index);
-          if (!isNaN(idx)) {
-            visibilityMap.set(idx, e.isIntersecting ? e.intersectionRatio : 0);
-          }
-        });
-
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(() => {
-          let maxRatio = 0;
-          let bestIdx = -1;
-          visibilityMap.forEach((ratio, idx) => {
-            if (ratio > maxRatio) {
-              maxRatio = ratio;
-              bestIdx = idx;
+        for (let i = 0; i < entries.length; i++) {
+          const entry = entries[i];
+          if (entry.isIntersecting) {
+            const idx = Number((entry.target as HTMLElement).dataset.index);
+            if (!isNaN(idx)) {
+              if (rafId) cancelAnimationFrame(rafId);
+              rafId = requestAnimationFrame(() => {
+                setActive(prev => (prev !== idx ? idx : prev));
+              });
             }
-          });
-          if (bestIdx !== -1 && maxRatio > 0.25) {
-            setActive(prev => (prev !== bestIdx ? bestIdx : prev));
           }
-        });
+        }
       },
-      { root: mainRef.current, threshold: [0.15, 0.35, 0.55, 0.75, 0.95] }
+      { root: mainRef.current, threshold: 0.5 }
     );
     mainRef.current?.querySelectorAll('section').forEach(s => observer.observe(s));
     return () => {
