@@ -110,6 +110,17 @@ export default function CoupleSection({ active }: CoupleSectionProps) {
           Your browser does not support video playback.
         </video>
 
+        {/* Seamless top mask overlay to remove the line above "A beautiful beginning" */}
+        <div
+          className="absolute top-0 inset-x-0 h-[8.5%] sm:h-[9.2%] z-10 pointer-events-none select-none"
+          style={{
+            background: 'radial-gradient(ellipse 70% 120% at 50% 0%, #0a3d44 0%, #03252c 60%, #011b20 100%)',
+            maskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)',
+          }}
+          aria-hidden="true"
+        />
+
         {/* =========================================================
             LEFT NAME: Directly & perfectly centered below "Bride"
             Appears promptly ("takunu") once couple stands in center
