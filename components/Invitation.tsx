@@ -52,6 +52,8 @@ function Details() {
 export default function Invitation() {
   const [opened, setOpened] = useState(false);
   const [active, setActive] = useState(0);
+  const [turningFrom, setTurningFrom] = useState<number | null>(null);
+  const turnTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const mainRef = useRef<HTMLElement>(null);
   const welcomeRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -61,7 +63,13 @@ export default function Invitation() {
     const target = Math.max(0, Math.min(5, nextIndex));
     if (target === active) return;
     lastTurnTimeRef.current = Date.now();
+    setTurningFrom(active);
     setActive(target);
+
+    if (turnTimeoutRef.current) clearTimeout(turnTimeoutRef.current);
+    turnTimeoutRef.current = setTimeout(() => {
+      setTurningFrom(null);
+    }, 850);
   }, [active]);
 
   const handleVideoClick = () => {
@@ -198,24 +206,41 @@ export default function Invitation() {
     const isTurned = pageIdx < active;
     const isCurrent = pageIdx === active;
 
+    // Is this page actively flipping through the air?
+    // Forward turn (active > turningFrom): page being flipped is turningFrom
+    // Backward turn (active < turningFrom): page being flipped is active
+    let isFlipping = false;
+    if (turningFrom !== null) {
+      if (active > turningFrom) {
+        isFlipping = pageIdx === turningFrom;
+      } else {
+        isFlipping = pageIdx === active;
+      }
+    }
+
+    // z-index:
+    // Flipping page gets highest zIndex (50) so its front is ALWAYS on top while turning!
+    // Current active page has zIndex: 20
+    // Turned pages on the left have 10 + pageIdx
+    // Unturned pages on the right have 10 - pageIdx
+    const zIndex = isFlipping
+      ? 50
+      : isCurrent
+      ? 20
+      : isTurned
+      ? 10 + pageIdx
+      : 10 - pageIdx;
+
     return {
-      zIndex: isCurrent ? 20 : isTurned ? 10 + pageIdx : 15 - pageIdx,
+      zIndex,
       animate: isTurned
         ? {
-            rotateY: -125,
-            rotateZ: -5,
-            x: '-22%',
-            scale: 0.96,
-            opacity: 0,
-            transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const },
+            rotateY: -180,
+            transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const },
           }
         : {
             rotateY: 0,
-            rotateZ: 0,
-            x: '0%',
-            scale: 1,
-            opacity: 1,
-            transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const },
+            transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const },
           },
     };
   };

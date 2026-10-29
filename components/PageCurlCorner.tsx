@@ -92,3 +92,4 @@ export default function PageCurlCorner({ onClick, visible = true }: PageCurlCorn
     </motion.button>
   );
 }
+
