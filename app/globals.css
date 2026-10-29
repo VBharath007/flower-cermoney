@@ -116,12 +116,27 @@ h3 {
 }
 
 .invitation.unlocked {
-    overflow-y: auto;
-    overflow-x: hidden;
-    overscroll-behavior-y: none;
-    scrollbar-width: thin;
-    scrollbar-color: var(--gold) var(--deep);
-    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100svh;
+    overflow: hidden;
+    perspective: 2600px;
+    perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
+}
+
+.book-page-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100svh;
+    overflow: hidden;
+    background-color: #022026;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.85);
 }
 
 .scene {
