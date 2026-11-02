@@ -5,7 +5,13 @@ import { motion, useReducedMotion } from 'framer-motion';
 export function Flourish({ className = '' }: { className?: string }) {
   return (
     <div aria-hidden="true" className={`flourish ${className}`}>
-      <span />✦ ❀ ✦<span />
+      <span className="flourish-line" />
+      <span className="flourish-symbols">
+        <span>✦</span>
+        <span>❀</span>
+        <span>✦</span>
+      </span>
+      <span className="flourish-line" />
     </div>
   );
 }

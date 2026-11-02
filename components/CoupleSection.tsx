@@ -113,15 +113,9 @@ export default function CoupleSection({ active }: CoupleSectionProps) {
         {/* =========================================================
             LEFT NAME: Directly & perfectly centered below "Bride"
             Appears promptly ("takunu") once couple stands in center
-            (Coordinates calibrated to 25.0% x, 56.5% y)
             ========================================================= */}
         <motion.div
-          className="absolute flex flex-col items-center pointer-events-none select-none z-20"
-          style={{
-            left: '25.0%',
-            top: '56.5%',
-            transform: 'translate(-50%, 0)',
-          }}
+          className="couple-name-badge bride-badge"
           initial={false}
           animate={{
             opacity: joined ? 1 : 0,
@@ -130,22 +124,11 @@ export default function CoupleSection({ active }: CoupleSectionProps) {
           }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h3
-            className="font-cinzel uppercase font-semibold text-center whitespace-nowrap drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] m-0"
-            style={{
-              fontSize: 'clamp(10px, 1.45vw, 22px)',
-              letterSpacing: '0.12em',
-              lineHeight: 1.2,
-              background: 'linear-gradient(135deg, #ffffff 0%, #fff1c7 25%, #f5d380 50%, #d4a747 75%, #ffffff 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
+          <h3 className="couple-name-text">
             {data.bride.name}
           </h3>
           <motion.span
-            className="block h-[1px] bg-gradient-to-r from-transparent via-[#d5b56d] to-transparent opacity-85 mt-1 sm:mt-1.5"
-            style={{ width: 'clamp(32px, 4.5vw, 75px)' }}
+            className="couple-name-line"
             initial={false}
             animate={{ scaleX: joined ? 1 : 0 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
@@ -155,15 +138,9 @@ export default function CoupleSection({ active }: CoupleSectionProps) {
         {/* =========================================================
             RIGHT NAME: Directly & perfectly centered below "Groom"
             Appears promptly ("takunu") once couple stands in center
-            (Coordinates calibrated to 75.8% x, 58.5% y)
             ========================================================= */}
         <motion.div
-          className="absolute flex flex-col items-center pointer-events-none select-none z-20"
-          style={{
-            left: '75.8%',
-            top: '58.5%',
-            transform: 'translate(-50%, 0)',
-          }}
+          className="couple-name-badge groom-badge"
           initial={false}
           animate={{
             opacity: joined ? 1 : 0,
@@ -172,22 +149,11 @@ export default function CoupleSection({ active }: CoupleSectionProps) {
           }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h3
-            className="font-cinzel uppercase font-semibold text-center whitespace-nowrap drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] m-0"
-            style={{
-              fontSize: 'clamp(10px, 1.45vw, 22px)',
-              letterSpacing: '0.12em',
-              lineHeight: 1.2,
-              background: 'linear-gradient(135deg, #ffffff 0%, #fff1c7 25%, #f5d380 50%, #d4a747 75%, #ffffff 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
+          <h3 className="couple-name-text">
             {data.groom.name}
           </h3>
           <motion.span
-            className="block h-[1px] bg-gradient-to-r from-transparent via-[#d5b56d] to-transparent opacity-85 mt-1 sm:mt-1.5"
-            style={{ width: 'clamp(32px, 4.5vw, 75px)' }}
+            className="couple-name-line"
             initial={false}
             animate={{ scaleX: joined ? 1 : 0 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}

@@ -32,12 +32,12 @@ export default function GratitudeScroll({ active = true, onReplay }: GratitudeSc
   };
 
   return (
-    <div className="royal-scroll-wrapper relative z-10 flex flex-col items-center justify-center w-full max-w-[840px] mx-auto px-2 sm:px-6 select-none">
+    <div className="royal-scroll-wrapper relative z-10 flex flex-col items-center justify-center w-full max-w-[840px] mx-auto px-1 sm:px-6 select-none">
       {/* Interactive status / hint button */}
       <motion.button
         type="button"
         onClick={toggleScroll}
-        className="mb-3 px-3.5 py-1 rounded-full border border-[#d5b56d66] bg-[#00242bcc] hover:bg-[#033a44] text-[#f7d688] text-[10px] sm:text-[11px] font-cinzel tracking-[0.2em] uppercase flex items-center gap-1.5 shadow-[0_4px_12px_rgba(0,10,14,0.6)] cursor-pointer transition-all active:scale-95"
+        className="mb-2 sm:mb-3 px-3 py-0.5 sm:px-3.5 sm:py-1 rounded-full border border-[#d5b56d66] bg-[#00242bcc] hover:bg-[#033a44] text-[#f7d688] text-[9.5px] sm:text-[11px] font-cinzel tracking-[0.16em] sm:tracking-[0.2em] uppercase flex items-center gap-1.5 shadow-[0_4px_12px_rgba(0,10,14,0.6)] cursor-pointer transition-all active:scale-95"
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
@@ -74,7 +74,7 @@ export default function GratitudeScroll({ active = true, onReplay }: GratitudeSc
           </div>
 
           {/* Center Cylinder Rod wrapped in Peacock Teal Velvet with Gold Trim */}
-          <div className="scroll-rod-center flex-1 relative h-[32px] sm:h-[40px] rounded-sm overflow-hidden shadow-[inset_0_2px_4px_rgba(255,255,255,0.25),0_6px_18px_rgba(0,10,14,0.95)]">
+          <div className="scroll-rod-center flex-1 relative h-[26px] sm:h-[34px] md:h-[40px] rounded-sm overflow-hidden shadow-[inset_0_2px_4px_rgba(255,255,255,0.25),0_6px_18px_rgba(0,10,14,0.95)]">
             <div className="rod-texture absolute inset-0" />
             {/* Top specular highlight representing cylindrical light reflection */}
             <div className="absolute top-[3px] inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[rgba(255,245,208,0.75)] to-transparent" />
@@ -105,7 +105,7 @@ export default function GratitudeScroll({ active = true, onReplay }: GratitudeSc
             PARCHMENT BODY (பட்டுச் சுருள் ஏடு) Unrolls Vertically
             ========================================================= */}
         <motion.div
-          className="scroll-parchment-body relative z-20 w-[94%] sm:w-[92%] overflow-hidden"
+          className="scroll-parchment-body relative z-20 w-[96%] sm:w-[92%] overflow-hidden"
           initial={false}
           animate={{
             height: isOpen ? 'auto' : 0,
@@ -117,14 +117,14 @@ export default function GratitudeScroll({ active = true, onReplay }: GratitudeSc
           }}
         >
           {/* Royal Peacock Teal Silk & Velvet Parchment Canvas */}
-          <div className="parchment-canvas relative p-5 sm:p-9 md:p-11 text-center shadow-[inset_0_0_90px_rgba(0,10,14,0.95),0_20px_50px_rgba(0,12,16,0.85)]">
+          <div className="parchment-canvas relative px-3 py-3.5 sm:px-8 sm:py-8 md:px-11 md:py-10 text-center shadow-[inset_0_0_90px_rgba(0,10,14,0.95),0_20px_50px_rgba(0,12,16,0.85)]">
             {/* Top roller cast shadow onto fabric */}
-            <div className="absolute top-0 inset-x-0 h-6 bg-gradient-to-b from-[rgba(0,8,10,0.9)] to-transparent pointer-events-none z-10" />
+            <div className="absolute top-0 inset-x-0 h-4 sm:h-6 bg-gradient-to-b from-[rgba(0,8,10,0.9)] to-transparent pointer-events-none z-10" />
             {/* Bottom roller cast shadow onto fabric */}
-            <div className="absolute bottom-0 inset-x-0 h-6 bg-gradient-to-t from-[rgba(0,8,10,0.9)] to-transparent pointer-events-none z-10" />
+            <div className="absolute bottom-0 inset-x-0 h-4 sm:h-6 bg-gradient-to-t from-[rgba(0,8,10,0.9)] to-transparent pointer-events-none z-10" />
 
             {/* Ornate Gold Filigree Border matching Reference Image */}
-            <div className="parchment-gold-border absolute inset-3 sm:inset-5 pointer-events-none border border-[#d5b56d88]">
+            <div className="parchment-gold-border absolute inset-2 sm:inset-5 pointer-events-none border border-[#d5b56d88]">
               {/* Outer Inset Thin Accent Line */}
               <div className="absolute inset-1 border border-[#ffd77a33]" />
 
@@ -195,11 +195,11 @@ export default function GratitudeScroll({ active = true, onReplay }: GratitudeSc
                 delay: isOpen ? 0.35 : 0,
                 ease: 'easeOut',
               }}
-              className="relative z-10 max-w-[620px] mx-auto py-2 sm:py-4"
+              className="relative z-10 max-w-[620px] w-full mx-auto py-1 sm:py-3 md:py-4 flex flex-col items-center text-center"
             >
               {/* Royal Kalasam / Lotus Motif */}
-              <div className="mx-auto mb-2 flex items-center justify-center">
-                <svg viewBox="0 0 36 20" className="w-9 h-5 text-[#ffd77a]" aria-hidden="true">
+              <div className="mx-auto mb-1 sm:mb-2 flex items-center justify-center">
+                <svg viewBox="0 0 36 20" className="w-7 h-4 sm:w-9 sm:h-5 text-[#ffd77a]" aria-hidden="true">
                   <path d="M18 1 C19.5 5, 21 11, 18 18 C15 11, 16.5 5, 18 1 Z" fill="currentColor" />
                   <path d="M18 7 C23 8, 28 11, 31 16 C25 17, 21 14, 18 11 Z" fill="currentColor" opacity="0.85" />
                   <path d="M18 7 C13 8, 8 11, 5 16 C11 17, 15 14, 18 11 Z" fill="currentColor" opacity="0.85" />
@@ -208,37 +208,37 @@ export default function GratitudeScroll({ active = true, onReplay }: GratitudeSc
               </div>
 
               {/* Elegant Script Header */}
-              <p className="script !text-[clamp(28px,4vw,44px)] !text-[#f7d688] mb-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+              <p className="script text-center !text-center !text-[clamp(21px,4.5vw,44px)] !text-[#f7d688] mb-0.5 sm:mb-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                 With love & gratitude
               </p>
 
               {/* Gold Foil Main Heading */}
-              <h2 className="!text-[clamp(22px,3vw,36px)] !text-[#fff8e3] tracking-[0.09em] font-medium uppercase drop-shadow-[0_2px_10px_rgba(213,181,109,0.5)]">
+              <h2 className="text-center !text-center !text-[clamp(16px,3.2vw,36px)] !text-[#fff8e3] tracking-[0.06em] sm:tracking-[0.09em] font-medium uppercase drop-shadow-[0_2px_10px_rgba(213,181,109,0.5)]">
                 Blessings & Best Wishes
               </h2>
 
-              <Flourish />
+              <Flourish className="!my-1 sm:!my-2 max-w-[260px] sm:max-w-[380px]" />
 
-              {/* Heartfelt Message */}
-              <p className="message !text-[clamp(14px,1.9vw,18px)] !text-[#f4e6cb] !leading-relaxed max-w-[500px] mx-auto mb-3 font-cinzel">
+              {/* Heartfelt Message - Perfectly centered in both Desktop & Mobile */}
+              <p className="message text-center !text-center !text-[clamp(12px,2.2vw,17.5px)] !text-[#f4e6cb] !leading-relaxed max-w-[480px] w-full mx-auto mb-2 sm:mb-3 font-cinzel tracking-[0.025em]">
                 Your presence, wishes and blessings
-                <br />
-                mean the world to us.
+                <br className="hidden sm:inline" />
+                {' '}mean the world to us.
               </p>
 
               {/* Grand Thank You Script */}
-              <p className="script thank-you !text-[clamp(38px,5.5vw,56px)] !text-[#ffd77a] !mt-2 drop-shadow-[0_2px_14px_rgba(255,215,122,0.6)]">
+              <p className="script thank-you text-center !text-center !text-[clamp(30px,6.2vw,56px)] !text-[#ffd77a] !mt-1 sm:!mt-2 drop-shadow-[0_2px_14px_rgba(255,215,122,0.6)]">
                 Thank you!
               </p>
 
               {/* Replay Invitation Action Button inside the Scroll */}
-              <div className="mt-5 sm:mt-6 flex items-center justify-center gap-3">
+              <div className="mt-3.5 sm:mt-5 md:mt-6 flex items-center justify-center gap-3">
                 <button
                   type="button"
                   onClick={onReplay}
-                  className="royal-replay-btn inline-flex items-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full border border-[#ffd77a] bg-gradient-to-r from-[#032e35] via-[#054955] to-[#032e35] hover:from-[#065b6a] hover:to-[#065b6a] text-[#fff2c6] text-[11px] sm:text-[12px] font-cinzel font-semibold tracking-[0.18em] uppercase shadow-[0_6px_22px_rgba(0,14,18,0.75),0_0_16px_rgba(213,181,109,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  className="royal-replay-btn inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2 sm:px-7 sm:py-3 rounded-full border border-[#ffd77a] bg-gradient-to-r from-[#032e35] via-[#054955] to-[#032e35] hover:from-[#065b6a] hover:to-[#065b6a] text-[#fff2c6] text-[10px] sm:text-[12px] font-cinzel font-semibold tracking-[0.16em] sm:tracking-[0.18em] uppercase shadow-[0_6px_22px_rgba(0,14,18,0.75),0_0_16px_rgba(213,181,109,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
-                  <RotateCcw size={15} className="text-[#ffd77a]" />
+                  <RotateCcw size={14} className="sm:w-[15px] sm:h-[15px] text-[#ffd77a]" />
                   <span>Replay Invitation</span>
                 </button>
               </div>
@@ -272,7 +272,7 @@ export default function GratitudeScroll({ active = true, onReplay }: GratitudeSc
           </div>
 
           {/* Center Cylinder Rod wrapped in Peacock Teal Velvet with Gold Trim */}
-          <div className="scroll-rod-center flex-1 relative h-[32px] sm:h-[40px] rounded-sm overflow-hidden shadow-[inset_0_2px_4px_rgba(255,255,255,0.25),0_8px_20px_rgba(0,10,14,0.95)]">
+          <div className="scroll-rod-center flex-1 relative h-[26px] sm:h-[34px] md:h-[40px] rounded-sm overflow-hidden shadow-[inset_0_2px_4px_rgba(255,255,255,0.25),0_8px_20px_rgba(0,10,14,0.95)]">
             <div className="rod-texture absolute inset-0" />
             <div className="absolute top-[3px] inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[rgba(255,245,208,0.75)] to-transparent" />
             <div className="absolute bottom-0 inset-x-0 h-[4px] bg-gradient-to-t from-[rgba(0,10,12,0.9)] to-transparent" />

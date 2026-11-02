@@ -212,20 +212,64 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    margin: 22px auto 27px;
+    gap: 14px;
+    margin: 18px auto 22px;
     color: var(--gold);
-    font-size: 18px
+    font-size: 16px;
+    width: 100%;
+    max-width: 480px;
+    white-space: nowrap;
 }
 
-.flourish span {
+.flourish .flourish-line {
     height: 1px;
-    width: 100px;
-    background: linear-gradient(90deg, transparent, var(--gold))
+    flex: 1 1 auto;
+    max-width: 100px;
+    min-width: 15px;
+    background: linear-gradient(90deg, transparent, var(--gold));
 }
 
-.flourish span:last-child {
-    transform: rotate(180deg)
+.flourish .flourish-line:last-child {
+    transform: rotate(180deg);
+}
+
+.flourish-symbols {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+    background: none !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+.flourish-symbols span {
+    display: inline-block !important;
+    background: none !important;
+    width: auto !important;
+    height: auto !important;
+    line-height: 1 !important;
+}
+
+@media (max-width: 640px) {
+    .flourish {
+        gap: 8px;
+        margin: 10px auto 14px;
+        font-size: 13px;
+        max-width: 280px;
+    }
+    .flourish .flourish-line {
+        max-width: 45px;
+        min-width: 10px;
+    }
+    .flourish-symbols {
+        font-size: 13px !important;
+        gap: 4px !important;
+    }
 }
 
 .flowers {
@@ -705,7 +749,8 @@ h3 {
 
 .message {
     font-size: clamp(18px, 2vw, 23px);
-    line-height: 1.6
+    line-height: 1.6;
+    text-align: center;
 }
 
 .honoree {
@@ -1727,4 +1772,116 @@ h3 {
 
 .royal-replay-btn {
     letter-spacing: 0.16em;
+}
+
+/* ============================================================
+   COUPLE SECTION NAMES (BRIDE & GROOM)
+   Desktop: 100% exact original position & style
+   Mobile: Scaled and repositioned to avoid side overflowing
+   ============================================================ */
+
+.couple-name-badge {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    user-select: none;
+    z-index: 20;
+    transform: translate(-50%, 0);
+}
+
+.couple-name-badge.bride-badge {
+    left: 25.0%;
+    top: 56.5%;
+}
+
+.couple-name-badge.groom-badge {
+    left: 75.8%;
+    top: 58.5%;
+}
+
+.couple-name-text {
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    margin: 0;
+    line-height: 1.2;
+    font-size: clamp(10px, 1.45vw, 22px);
+    letter-spacing: 0.12em;
+    background: linear-gradient(135deg, #ffffff 0%, #fff1c7 25%, #f5d380 50%, #d4a747 75%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.9));
+}
+
+.couple-name-line {
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d5b56d, transparent);
+    opacity: 0.85;
+    margin-top: 6px;
+    width: clamp(32px, 4.5vw, 75px);
+}
+
+@media (max-width: 640px) {
+    .royal-scroll-wrapper {
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+        max-width: 100% !important;
+    }
+
+    .scroll-handle {
+        width: clamp(26px, 8vw, 38px) !important;
+        height: clamp(16px, 5.5vw, 26px) !important;
+    }
+
+    .scroll-rod-center {
+        height: 24px !important;
+    }
+
+    .parchment-canvas {
+        padding: 12px 10px 16px !important;
+    }
+
+    .parchment-gold-border {
+        inset: 5px !important;
+    }
+
+    .parchment-corner {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    .parchment-side-tab {
+        display: none !important;
+    }
+
+    .gratitude-scene {
+        padding: 8px 4px !important;
+        overflow-y: auto !important;
+    }
+
+    /* ONLY Mobile view adjustments for couple section */
+    .couple-name-badge.bride-badge {
+        left: 25.0%;
+        top: 57.0%;
+    }
+
+    .couple-name-badge.groom-badge {
+        left: 72.0%;
+        top: 58.5%;
+    }
+
+    .couple-name-text {
+        font-size: clamp(7.5px, 2.3vw, 10px);
+        letter-spacing: 0.04em;
+    }
+
+    .couple-name-line {
+        width: clamp(18px, 5.5vw, 34px);
+        margin-top: 2px;
+    }
 }
